@@ -6,9 +6,9 @@ from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_percenta
 from sklearn.model_selection import train_test_split
 
 # Import datasets
-data = pd.read_csv('carbon cathode.csv')
+data = pd.read_csv('carbon_cathode_cleaned.csv')
 # Setting the first three columns as indexes and separating features and target
-X = data.iloc[:, 3:-1]  # Features
+X = data.iloc[:, :-1]  # Features
 y = data.iloc[:, -1]  # Target
 
 # Splitting the dataset into training and testing sets with a 70:30 ratio

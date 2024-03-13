@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.feature_selection import RFE
-from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+# from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
 # Import datasets
@@ -12,7 +13,7 @@ y = data.iloc[:, -1]  # Target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=21)
 
 # Initialize the estimator
-estimator = LinearRegression()
+estimator = RandomForestRegressor()
 
 # Loop for n_features_to_select from 3 to 14
 results = []  # to store the selected features for each number of features to select

@@ -1,25 +1,26 @@
 import pymrmr
 import pandas as pd
 
-# Load your data
-df = pd.read_csv('carbon cathode.csv')
+# Assuming the cleaned dataset is loaded
+df = pd.read_csv('carbon_cathode_cleaned.csv')
 
-# Assuming the last column is the target and the rest are features
-X = df.iloc[:, 3:-1]  # Adjust based on your dataset
-y = df.iloc[:, -1]
+# Separating features and target without combining them for mRMR
+X = df.iloc[:, :-1]  # All columns except the last one are features
+y = df.iloc[:, -1]   # The last column is the target
 
-# Combine features and target for mRMR
+# mRMR expects the target to be part of the DataFrame but not as a feature to select.
+# So, we correctly add it as a separate column for clarity and compliance with mRMR requirements.
 df_mrmr = pd.concat([X, y.rename('Target')], axis=1)
 
-# Loop over a range of n_features from 1 to 14
+# Loop over a range of n_features from 1 to 15
 results = []  # Store the selected features for each number of features
-for n_features in range(1, 15):
-    # Use mRMR to select the top N features
+for n_features in range(1, 16):
+    # Use mRMR to select the top N features, ensuring 'Target' is not among the features to be selected but used as the variable to guide selection
     selected_features = pymrmr.mRMR(df_mrmr, 'MIQ', n_features)
 
     # Append the results
     results.append((n_features, selected_features))
 
-# Print the results
+# Displaying results more appropriately
 for n_features, features in results:
     print(f"Top {n_features} features selected by mRMR: {features}")

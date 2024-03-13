@@ -1,4 +1,4 @@
-Index,Anode,Cathode,O,N,B,S,P,Specific surface area,Pore volume,Vmes/mac,ID/IG,Electrolyte,Current collector,Active mass loading,Potential window,Current density,Specific capacity
+Index,Anode,Cathode,O,N,B,S,P,SSA,Vt,Vmes/mac,ID/IG,Electrolyte,Current collector,Active mass loading,Potential window,Current density,Specific capacity
 1,Zn foil,N-3D-PCN,7.15,3.52,0,0,0,1546.1,0.5753,0.03714,1.029,2,2,1.25,1.6,0.1,85
 2,Zn foil,BN-3D-PCN,8.12,3.79,3.66,0,0,1315.2,0.5116,0.05106,1.038,2,2,1.25,1.6,0.1,114
 3,Zn foil,BN-3D-PCN,8.12,3.79,3.66,0,0,1315.2,0.5116,0.05106,1.038,6,2,1.25,1.6,0.2,256
