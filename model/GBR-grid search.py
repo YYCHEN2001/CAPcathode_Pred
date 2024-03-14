@@ -11,14 +11,14 @@ df = pd.read_csv('carbon_cathode_cleaned.csv')  # Update this path to your datas
 X = df.iloc[:, :-1]  # Exclude the last column (target)
 y = df.iloc[:, -1]  # Target column
 
-# Initialize 10-Fold Cross-Validator
-kf = KFold(n_splits=10, shuffle=True, random_state=21)
+# Initialize K-Fold Cross-Validator
+kf = KFold(n_splits=5, shuffle=True, random_state=21)
 
 # Set up the parameter grid
 param_grid = {
     'n_estimators': range(100, 2100, 100),
     'learning_rate': np.arange(0.05, 0.325, 0.025),
-    'max_depth': range(3, 7)
+    'max_depth': range(2, 7)
 }
 
 # Initialize the model with Gradient Boosting Regression
