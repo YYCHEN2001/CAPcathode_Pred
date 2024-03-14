@@ -55,3 +55,4 @@ all_shap_values = np.concatenate(shap_values_list, axis=0)
 
 # 绘制SHAP值的摘要图，展示整体分析
 shap.summary_plot(all_shap_values, X, plot_type="bar")
+shap.summary_plot(all_shap_values, X)
