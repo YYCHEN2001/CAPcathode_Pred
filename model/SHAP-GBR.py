@@ -16,7 +16,8 @@ y = df['Specific capacity']
 loo = LeaveOneOut()
 
 # 初始化梯度提升回归器
-gbr = GradientBoostingRegressor(n_estimators=100, learning_rate=0.1, max_depth=3, random_state=21)
+gbr = GradientBoostingRegressor(n_estimators=1300, learning_rate=0.175, max_depth=3,
+                                min_samples_leaf=1, min_samples_split=2, random_state=21)
 
 # 存储指标和SHAP值
 mae_scores = []
