@@ -1,9 +1,8 @@
-
-from sklearn.model_selection import LeaveOneOut
-from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error
-from sklearn.ensemble import GradientBoostingRegressor  # Using Gradient Boosting Regression
 import numpy as np
 import pandas as pd
+from sklearn.ensemble import GradientBoostingRegressor  # Using Gradient Boosting Regression
+from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error
+from sklearn.model_selection import LeaveOneOut
 
 # Load the cleaned dataset
 df = pd.read_csv('carbon_cathode_cleaned.csv')
@@ -19,12 +18,14 @@ loo = LeaveOneOut()
 # n_estimators represents the number of boosting stages to be run.
 # learning_rate shrinks the contribution of each tree by learning_rate.
 # max_depth is the maximum depth of the individual regression estimators.
-gbr = GradientBoostingRegressor(n_estimators=100, learning_rate=0.1, max_depth=3, random_state=21)
+gbr = GradientBoostingRegressor(n_estimators=1300, learning_rate=0.175, max_depth=3,
+                                min_samples_leaf=1, min_samples_split=2, random_state=21)
 
 # Metrics storage
 mae_scores = []
 rmse_scores = []
 mape_scores = []
+train_r2_scores = []
 
 # Perform LOOCV
 for train_index, test_index in loo.split(X):

@@ -1,0 +1,3 @@
+Best parameters: {'learning_rate': 0.17500000000000004, 'max_depth': 3, 'n_estimators': 1300}
+Best score (R2): 0.6746431611483268
+R2 Score with the Best Model: 0.9999999952638696
