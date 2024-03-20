@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # 加载数据
-data_path = 'carbon_cathode_cleaned.csv'
+data_path = 'carbon_20240320.csv'
 data = pd.read_csv(data_path)
 
 # 计算斯皮尔曼等级相关系数

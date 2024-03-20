@@ -5,7 +5,7 @@ import numpy as np
 from matplotlib.font_manager import FontProperties
 
 # Load the dataset from its location (update the path to where your dataset is stored)
-df = pd.read_csv('carbon_cathode_cleaned.csv')
+df = pd.read_csv('carbon_20240320.csv')
 
 # Calculate the correlation matrix
 corr = df.corr()

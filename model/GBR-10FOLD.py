@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolu
 from sklearn.model_selection import KFold
 
 # Load the cleaned dataset
-df = pd.read_csv('carbon_cathode_cleaned.csv')  # Make sure to use the correct path for your dataset
+df = pd.read_csv('carbon_20240320.csv')  # Make sure to use the correct path for your dataset
 
 # Features and Target separation
 X = df.iloc[:, :-1]  # Exclude the last column (target)
@@ -15,7 +15,7 @@ y = df.iloc[:, -1]  # Target column
 kf = KFold(n_splits=10, shuffle=True, random_state=21)
 
 # Initialize the model with Gradient Boosting Regression
-gbr = GradientBoostingRegressor(n_estimators=1300, learning_rate=0.175, max_depth=3,
+gbr = GradientBoostingRegressor(n_estimators=2000, learning_rate=0.125, max_depth=3,
                                 min_samples_leaf=1, min_samples_split=2, random_state=21)
 
 # Prepare DataFrame to store metrics for each fold

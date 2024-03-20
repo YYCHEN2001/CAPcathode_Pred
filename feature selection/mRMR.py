@@ -2,7 +2,7 @@ import pymrmr
 import pandas as pd
 
 # Assuming the cleaned dataset is loaded
-df = pd.read_csv('carbon_cathode_cleaned.csv')
+df = pd.read_csv('carbon_20240320.csv')
 
 # Separating features and target without combining them for mRMR
 X = df.iloc[:, :-1]  # All columns except the last one are features

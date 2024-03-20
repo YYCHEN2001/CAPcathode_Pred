@@ -5,9 +5,9 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 
 # Import datasets
-data = pd.read_csv('carbon cathode.csv')
+data = pd.read_csv('carbon_20240320.csv')
 # Setting the first three columns as indexes and separating features and target
-X = data.iloc[:, 3:-1]  # Features
+X = data.iloc[:, :-1]  # Features
 y = data.iloc[:, -1]  # Target
 # Splitting the dataset into training and testing sets with a 70:30 ratio
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=21)
@@ -15,7 +15,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 # Initialize the estimator
 estimator = RandomForestRegressor()
 
-# Loop for n_features_to_select from 3 to 14
+# Loop for n_features_to_select from 1 to 14
 results = []  # to store the selected features for each number of features to select
 for n_features in range(1, 15):
     # Instantiate RFE with the current number of features to select

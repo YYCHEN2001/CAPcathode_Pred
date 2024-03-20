@@ -5,14 +5,14 @@ from sklearn.metrics import r2_score
 from sklearn.model_selection import KFold, GridSearchCV
 
 # Load the cleaned dataset
-df = pd.read_csv('carbon_cathode_cleaned.csv')  # Update this path to your dataset
+df = pd.read_csv('carbon_20240320.csv')  # Update this path to your dataset
 
 # Features and Target separation
 X = df.iloc[:, :-1]  # Exclude the last column (target)
 y = df.iloc[:, -1]  # Target column
 
 # Initialize K-Fold Cross-Validator
-kf = KFold(n_splits=5, shuffle=True, random_state=21)
+kf = KFold(n_splits=10, shuffle=True, random_state=21)
 
 # Set up the parameter grid
 param_grid = {

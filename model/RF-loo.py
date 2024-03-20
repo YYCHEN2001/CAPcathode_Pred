@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 # Load the cleaned dataset
-df = pd.read_csv('carbon_cathode_cleaned.csv')
+df = pd.read_csv('carbon_20240320.csv')
 
 # Features and Target separation
 X = df.iloc[:, :-1]  # Exclude the last column (target)
@@ -15,7 +15,7 @@ y = df.iloc[:, -1]  # Target column
 loo = LeaveOneOut()
 
 # Initialize the model
-rf = RandomForestRegressor(max_depth=None, min_samples_leaf=1, min_samples_split=2, n_estimators=100, random_state=21)
+rf = RandomForestRegressor(max_depth=None, min_samples_leaf=1, min_samples_split=2, n_estimators=1000, random_state=42)
 
 # Metrics storage
 mae_scores = []

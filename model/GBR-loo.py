@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolu
 from sklearn.model_selection import LeaveOneOut
 
 # Load the cleaned dataset
-df = pd.read_csv('carbon_cathode_cleaned.csv')
+df = pd.read_csv('carbon_20240320.csv')
 
 # Features and Target separation
 X = df.iloc[:, :-1]  # Exclude the last column (target)

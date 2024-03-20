@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the Excel file
-excel_data = pd.read_excel('./carbon cathode.xlsx')
+excel_data = pd.read_excel('carbon_20240320.csv')
 
 # Convert the Excel file to CSV, ensuring the first row is the header
 csv_path = 'model/carbon cathode.csv'
