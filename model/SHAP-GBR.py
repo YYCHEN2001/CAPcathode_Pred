@@ -55,9 +55,12 @@ average_mae = np.mean(mae_scores)
 average_rmse = np.mean(rmse_scores)
 average_mape = np.mean(mape_scores) * 100
 
+
 # 合并所有SHAP值用于后续分析
 all_shap_values = np.concatenate(shap_values_list, axis=0)
 
 # 绘制SHAP值的摘要图，展示整体分析
 shap.summary_plot(all_shap_values, X, plot_type="bar")
 shap.summary_plot(all_shap_values, X)
+
+
