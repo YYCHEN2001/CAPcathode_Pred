@@ -3,17 +3,20 @@ import pandas as pd
 import shap
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error
-from sklearn.model_selection import LeaveOneOut
+from sklearn.model_selection import KFold
 
 # 加载数据集
 df = pd.read_csv('carbon_20240320.csv')  # 请替换为你的文件路径
 
-# 准备数据
-X = df.drop('Cs', axis=1)
-y = df['Cs']
+# One-hot encode the categorical columns 'Electrolyte' and 'Current collector'
+df_encoded = pd.get_dummies(df, columns=['Electrolyte', 'Current collector'])
 
-# 初始化留一交叉验证器
-loo = LeaveOneOut()
+# Features and Target separation
+X = df_encoded.drop('Cs', axis=1)
+y = df_encoded['Cs']
+
+# Initialize 10-Fold Cross Validator
+kf = KFold(n_splits=10, shuffle=True, random_state=21)
 
 # 初始化梯度提升回归器
 gbr = GradientBoostingRegressor(n_estimators=2000, learning_rate=0.125, max_depth=3,
@@ -25,8 +28,9 @@ rmse_scores = []
 mape_scores = []
 shap_values_list = []
 
-# 执行留一交叉验证
-for train_index, test_index in loo.split(X):
+# Perform 10-Fold CV
+rows = []  # To collect rows before creating the DataFrame
+for fold, (train_index, test_index) in enumerate(kf.split(X), start=1):
     X_train, X_test = X.iloc[train_index], X.iloc[test_index]
     y_train, y_test = y.iloc[train_index], y.iloc[test_index]
 

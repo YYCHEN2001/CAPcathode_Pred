@@ -1,0 +1,20 @@
+1, O
+2, O, SSA
+3, O, SSA, I/m
+4, O, N, SSA, I/m
+5, O, N, SSA, mact, I/m
+6, O, N, SSA, Mic/Mes, mact, I/m
+7, O, N, SSA, Mic/Mes, ID/IG, mact, I/m
+8, O, N, SSA, Vt, Mic/Mes, ID/IG, mact, I/m
+9, O, N, SSA, Vt, Mic/Mes, ID/IG, mact, I/m, Electrolyte_4
+10, O, N, SSA, Vt, Mic/Mes, ID/IG, mact, I/m, Electrolyte_2, Electrolyte_4
+11, O, N, SSA, Vt, Mic/Mes, ID/IG, mact, I/m, Electrolyte_2, Electrolyte_4, Current collector_1
+12, O, N, SSA, Vt, Mic/Mes, ID/IG, mact, DV, I/m, Electrolyte_2, Electrolyte_4, Current collector_1
+13, O, N, SSA, Vt, Mic/Mes, ID/IG, mact, DV, I/m, Electrolyte_1, Electrolyte_2, Electrolyte_4, Current collector_1
+14, O, N, SSA, Vt, Mic/Mes, ID/IG, mact, DV, I/m, Electrolyte_1, Electrolyte_2, Electrolyte_4, Current collector_1, Current collector_3
+15, O, N, SSA, Vt, Mic/Mes, ID/IG, mact, DV, I/m, Electrolyte_1, Electrolyte_2, Electrolyte_4, Current collector_1, Current collector_3, Current collector_4
+16, O, N, S, SSA, Vt, Mic/Mes, ID/IG, mact, DV, I/m, Electrolyte_1, Electrolyte_2, Electrolyte_4, Current collector_1, Current collector_3, Current collector_4
+17, O, N, S, SSA, Vt, Mic/Mes, ID/IG, mact, DV, I/m, Electrolyte_1, Electrolyte_2, Electrolyte_3, Electrolyte_4, Current collector_1, Current collector_3, Current collector_4
+18, O, N, S, SSA, Vt, Mic/Mes, ID/IG, mact, DV, I/m, Electrolyte_1, Electrolyte_2, Electrolyte_3, Electrolyte_4, Current collector_1, Current collector_3, Current collector_4, Current collector_5
+19, O, N, S, SSA, Vt, Mic/Mes, ID/IG, mact, DV, I/m, Electrolyte_1, Electrolyte_2, Electrolyte_3, Electrolyte_4, Current collector_1, Current collector_2, Current collector_3, Current collector_4, Current collector_5
+

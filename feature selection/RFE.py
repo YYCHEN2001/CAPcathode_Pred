@@ -1,23 +1,29 @@
 import pandas as pd
 from sklearn.feature_selection import RFE
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import GradientBoostingRegressor
 # from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
-# Import datasets
-data = pd.read_csv('carbon_20240320.csv')
-# Setting the first three columns as indexes and separating features and target
-X = data.iloc[:, :-1]  # Features
-y = data.iloc[:, -1]  # Target
-# Splitting the dataset into training and testing sets with a 70:30 ratio
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=21)
+# Load the cleaned dataset
+df = pd.read_csv('carbon_20240320.csv')
+
+# One-hot encode the categorical columns 'Electrolyte' and 'Current collector'
+df_encoded = pd.get_dummies(df, columns=['Electrolyte', 'Current collector'])
+
+# Features and Target separation
+X = df_encoded.drop('Cs', axis=1)
+y = df_encoded['Cs']
+
+# Splitting the dataset into training and testing sets with a 80:20 ratio
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=21)
 
 # Initialize the estimator
-estimator = RandomForestRegressor()
+estimator = GradientBoostingRegressor(n_estimators=2000, learning_rate=0.125, max_depth=3,
+                                min_samples_leaf=1, min_samples_split=2, random_state=21)
 
-# Loop for n_features_to_select from 1 to 14
+# Loop for n_features_to_select from 1 to 19
 results = []  # to store the selected features for each number of features to select
-for n_features in range(1, 15):
+for n_features in range(1, 20):
     # Instantiate RFE with the current number of features to select
     selector = RFE(estimator, n_features_to_select=n_features)
 
