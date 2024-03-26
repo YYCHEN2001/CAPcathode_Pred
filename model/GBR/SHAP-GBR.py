@@ -6,10 +6,10 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolu
 from sklearn.model_selection import KFold
 
 # 加载数据集
-df = pd.read_csv('carbon_20240320.csv')  # 请替换为你的文件路径
+df = pd.read_csv('carbon_20240326_2.csv')  # 请替换为你的文件路径
 
-# One-hot encode the categorical columns 'Electrolyte' and 'Current collector'
-df_encoded = pd.get_dummies(df, columns=['Electrolyte', 'Current collector'])
+# One-hot encode the categorical columns 'Electrolyte'
+df_encoded = pd.get_dummies(df, columns=['Electrolyte'])
 
 # Features and Target separation
 X = df_encoded.drop('Cs', axis=1)
@@ -19,8 +19,8 @@ y = df_encoded['Cs']
 kf = KFold(n_splits=10, shuffle=True, random_state=21)
 
 # 初始化梯度提升回归器
-gbr = GradientBoostingRegressor(n_estimators=2000, learning_rate=0.125, max_depth=3,
-                                min_samples_leaf=1, min_samples_split=2, random_state=21)
+gbr = GradientBoostingRegressor(n_estimators=2000, learning_rate=0.1, max_depth=3,
+                                min_samples_leaf=8, min_samples_split=5, random_state=21)
 
 # 存储指标和SHAP值
 mae_scores = []

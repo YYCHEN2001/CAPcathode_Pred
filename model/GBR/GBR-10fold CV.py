@@ -5,23 +5,21 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolu
 from sklearn.model_selection import KFold
 
 # Load the cleaned dataset
-df = pd.read_csv('carbon_20240320.csv')
+df = pd.read_csv('carbon_20240326_2.csv')
 
-# One-hot encode the categorical columns 'Electrolyte' and 'Current collector'
-df_encoded = pd.get_dummies(df, columns=['Electrolyte', 'Current collector'])
+# One-hot encode the categorical columns 'Electrolyte'
+df_encoded = pd.get_dummies(df, columns=['Electrolyte'])
 
 # Features and Target separation
 X = df_encoded.drop('Cs', axis=1)
 y = df_encoded['Cs']
-pd.set_option('display.max_columns', None)
-print(X)
 
 # Initialize 10-Fold Cross Validator
 kf = KFold(n_splits=10, shuffle=True, random_state=21)
 
 # Initialize the model with Gradient Boosting Regression
-gbr = GradientBoostingRegressor(n_estimators=2000, learning_rate=0.125, max_depth=3,
-                                min_samples_leaf=1, min_samples_split=2, random_state=21)
+gbr = GradientBoostingRegressor(n_estimators=2000, learning_rate=0.1, max_depth=3,
+                                min_samples_leaf=8, min_samples_split=5, random_state=21)
 
 # Prepare DataFrame to store metrics for each fold
 metrics_df = pd.DataFrame(columns=['Fold', 'R2', 'MAE', 'MAPE', 'RMSE'])
@@ -57,3 +55,5 @@ metrics_df = pd.concat([metrics_df, pd.DataFrame([average_metrics])], ignore_ind
 
 # Display the metrics for each fold and the averages
 print(metrics_df)
+# Save the DataFrame to a CSV file
+metrics_df.to_csv('KFold results of GBR.csv', index=False)
