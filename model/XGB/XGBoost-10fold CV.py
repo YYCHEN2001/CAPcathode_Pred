@@ -1,7 +1,7 @@
-import numpy as np
 import pandas as pd
 from xgboost import XGBRegressor
-from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error, r2_score
+from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error, r2_score, \
+    root_mean_squared_error
 from sklearn.model_selection import KFold
 
 # Load the cleaned dataset
@@ -18,7 +18,15 @@ y = df_encoded['Cs']
 kf = KFold(n_splits=10, shuffle=True, random_state=21)
 
 # Initialize the model with XGBoost Regression
-xgb = XGBRegressor(random_state=21)
+xgb = XGBRegressor(n_estimators=2000,
+                   learning_rate=0.15,
+                   max_depth=3,
+                   min_child_weight=1,
+                   gamma=2,
+                   subsample=0.1,
+                   reg_alpha=0.5,
+                   reg_lambda=2,
+                   random_state=21)
 
 # Prepare DataFrame to store metrics for each fold
 metrics_df = pd.DataFrame(columns=['Fold', 'R2', 'MAE', 'MAPE', 'RMSE'])
@@ -41,7 +49,7 @@ for fold, (train_index, test_index) in enumerate(kf.split(X), start=1):
         'R2': r2_score(y_test, y_pred),
         'MAE': mean_absolute_error(y_test, y_pred),
         'MAPE': mean_absolute_percentage_error(y_test, y_pred),
-        'RMSE': np.sqrt(mean_squared_error(y_test, y_pred))
+        'RMSE': root_mean_squared_error(y_test, y_pred)
     })
 
 # Convert list of rows to DataFrame

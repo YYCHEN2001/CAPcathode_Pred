@@ -1,16 +1,16 @@
-import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-from xgboost import XGBRegressor
+import pandas as pd
 from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error, r2_score, \
     root_mean_squared_error
-from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from xgboost import XGBRegressor
 
 # Load the cleaned dataset
 df = pd.read_csv('../../dataset/carbon_20240326_2.csv')
 
-# One-hot encode the categorical columns 'Electrolyte' and 'Current collector'
+# One-hot encode the categorical columns 'Electrolyte'
 df_encoded = pd.get_dummies(df, columns=['Electrolyte'])
 
 # Features and Target separation
@@ -25,7 +25,15 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
 # Initialize the model with XGBoost Regression
-xgb = XGBRegressor(random_state=21)
+xgb = XGBRegressor(n_estimators=2000,
+                   learning_rate=0.15,
+                   max_depth=3,
+                   min_child_weight=1,
+                   gamma=0.5,
+                   subsample=0.1,
+                   reg_alpha=0.5,
+                   reg_lambda=2,
+                   random_state=21)
 xgb.fit(X_train_scaled, y_train)
 y_pred_train = xgb.predict(X_train_scaled)
 y_pred_test = xgb.predict(X_test_scaled)

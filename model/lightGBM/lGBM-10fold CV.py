@@ -1,6 +1,5 @@
-import numpy as np
 import pandas as pd
-from sklearn.ensemble import GradientBoostingRegressor
+from lightgbm import LGBMRegressor
 from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error, r2_score, \
     root_mean_squared_error
 from sklearn.model_selection import KFold
@@ -18,9 +17,13 @@ y = df_encoded['Cs']
 # Initialize 10-Fold Cross Validator
 kf = KFold(n_splits=10, shuffle=True, random_state=21)
 
-# Initialize the model with Gradient Boosting Regression
-gbr = GradientBoostingRegressor(n_estimators=2000, learning_rate=0.1, max_depth=3,
-                                min_samples_leaf=8, min_samples_split=5, random_state=21)
+# Initialize the model with LightGBM Regression
+lgbm = LGBMRegressor(min_child_samples=2,
+                     num_leaves=5,
+                     max_depth=-1,
+                     learning_rate=0.15,
+                     n_estimators=1000,
+                     random_state=21)
 
 # Prepare DataFrame to store metrics for each fold
 metrics_df = pd.DataFrame(columns=['Fold', 'R2', 'MAE', 'MAPE', 'RMSE'])
@@ -32,10 +35,10 @@ for fold, (train_index, test_index) in enumerate(kf.split(X), start=1):
     y_train, y_test = y.iloc[train_index], y.iloc[test_index]
 
     # Fit the model
-    gbr.fit(X_train, y_train)
+    lgbm.fit(X_train, y_train)
 
     # Predict
-    y_pred = gbr.predict(X_test)
+    y_pred = lgbm.predict(X_test)
 
     # Calculate and store metrics in the list
     rows.append({
@@ -57,4 +60,4 @@ metrics_df = pd.concat([metrics_df, pd.DataFrame([average_metrics])], ignore_ind
 # Display the metrics for each fold and the averages
 print(metrics_df)
 # Save the DataFrame to a CSV file
-metrics_df.to_csv('KFold results of GBR.csv', index=False)
+metrics_df.to_csv('KFold results of LGBM.csv', index=False)
