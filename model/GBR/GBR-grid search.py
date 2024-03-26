@@ -5,7 +5,7 @@ from sklearn.metrics import r2_score, make_scorer, mean_absolute_error, root_mea
 from sklearn.model_selection import KFold, GridSearchCV
 
 # Load the cleaned dataset
-df = pd.read_csv('carbon_20240326.csv')  # Update this path to your dataset
+df = pd.read_csv('../../dataset/carbon_20240326_2.csv')  # Update this path to your dataset
 
 # One-hot encode the categorical columns 'Electrolyte' and 'Current collector'
 df_encoded = pd.get_dummies(df, columns=['Electrolyte'])

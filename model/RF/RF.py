@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
 # Load the cleaned dataset
-df = pd.read_csv('carbon_20240326_2.csv')
+df = pd.read_csv('../../dataset/carbon_20240326_2.csv')
 
 # One-hot encode the categorical columns 'Electrolyte' and 'Current collector'
 df_encoded = pd.get_dummies(df, columns=['Electrolyte'])

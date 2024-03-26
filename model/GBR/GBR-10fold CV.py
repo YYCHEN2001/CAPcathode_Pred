@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolu
 from sklearn.model_selection import KFold
 
 # Load the cleaned dataset
-df = pd.read_csv('carbon_20240326_2.csv')
+df = pd.read_csv('../../dataset/carbon_20240326_2.csv')
 
 # One-hot encode the categorical columns 'Electrolyte'
 df_encoded = pd.get_dummies(df, columns=['Electrolyte'])

@@ -5,7 +5,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolu
 from sklearn.model_selection import KFold
 
 # Load the cleaned dataset
-df = pd.read_csv('carbon_20240326_2.csv')
+df = pd.read_csv('../../dataset/carbon_20240326_2.csv')
 
 # One-hot encode the categorical columns 'Electrolyte'
 df_encoded = pd.get_dummies(df, columns=['Electrolyte'])
@@ -30,10 +30,10 @@ for fold, (train_index, test_index) in enumerate(kf.split(X), start=1):
     y_train, y_test = y.iloc[train_index], y.iloc[test_index]
 
     # Fit the model
-    gbr.fit(X_train, y_train)
+    xgb.fit(X_train, y_train)
 
     # Predict
-    y_pred = gbr.predict(X_test)
+    y_pred = xgb.predict(X_test)
 
     # Calculate and store metrics in the list
     rows.append({

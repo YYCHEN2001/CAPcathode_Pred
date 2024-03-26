@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPRegressor
 from sklearn.preprocessing import StandardScaler
 
-df = pd.read_csv('carbon_20240326_2.csv')
+df = pd.read_csv('../../dataset/carbon_20240326_2.csv')
 df_encoded = pd.get_dummies(df, columns=['Electrolyte'])
 X = df_encoded.drop('Cs', axis=1)
 y = df_encoded['Cs']
