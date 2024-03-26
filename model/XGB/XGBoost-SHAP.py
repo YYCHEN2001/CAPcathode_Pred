@@ -2,7 +2,7 @@ import pandas as pd
 import shap
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import GradientBoostingRegressor
+from xgboost import XGBRegressor
 
 # Load the cleaned dataset
 df = pd.read_csv('../../dataset/carbon_20240326_2.csv')
@@ -22,19 +22,21 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
 # Initialize the model with XGBoost Regression
-gbr = GradientBoostingRegressor(n_estimators=2000,
-                                learning_rate=0.1,
-                                max_depth=3,
-                                min_samples_leaf=8,
-                                min_samples_split=5,
-                                alpha=0.75,
-                                random_state=21)
-gbr.fit(X_train_scaled, y_train)
-y_pred_train = gbr.predict(X_train_scaled)
-y_pred_test = gbr.predict(X_test_scaled)
+xgb = XGBRegressor(n_estimators=2000,
+                   learning_rate=0.15,
+                   max_depth=3,
+                   min_child_weight=1,
+                   gamma=0.5,
+                   subsample=0.1,
+                   reg_alpha=0.5,
+                   reg_lambda=2,
+                   random_state=21)
+xgb.fit(X_train_scaled, y_train)
+y_pred_train = xgb.predict(X_train_scaled)
+y_pred_test = xgb.predict(X_test_scaled)
 
 # Calculate SHAP values
-explainer = shap.Explainer(gbr)
+explainer = shap.Explainer(xgb)
 shap_values = explainer(X_train_scaled)
 
 # Plot summary of SHAP values

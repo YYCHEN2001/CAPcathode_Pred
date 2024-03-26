@@ -25,7 +25,7 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
 # Initialize the model with RandomForestRegressor
-rfr = RandomForestRegressor(n_estimators=500,
+rfr = RandomForestRegressor(n_estimators=2000,
                             max_depth=9,
                             min_samples_leaf=1,
                             min_samples_split=2,

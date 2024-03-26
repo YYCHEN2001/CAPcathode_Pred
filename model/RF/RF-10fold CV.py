@@ -1,7 +1,7 @@
-import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error, r2_score
+from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error, r2_score, \
+    root_mean_squared_error
 from sklearn.model_selection import KFold
 
 # Load the cleaned dataset
@@ -18,7 +18,7 @@ y = df_encoded['Cs']
 kf = KFold(n_splits=10, shuffle=True, random_state=21)
 
 # Initialize the model with RandomForestRegressor
-rfr = RandomForestRegressor(n_estimators=500,
+rfr = RandomForestRegressor(n_estimators=2000,
                             max_depth=9,
                             min_samples_leaf=1,
                             min_samples_split=2,
@@ -45,7 +45,7 @@ for fold, (train_index, test_index) in enumerate(kf.split(X), start=1):
         'R2': r2_score(y_test, y_pred),
         'MAE': mean_absolute_error(y_test, y_pred),
         'MAPE': mean_absolute_percentage_error(y_test, y_pred),
-        'RMSE': np.sqrt(mean_squared_error(y_test, y_pred))
+        'RMSE': root_mean_squared_error(y_test, y_pred)
     })
 
 # Convert list of rows to DataFrame
@@ -59,4 +59,4 @@ metrics_df = pd.concat([metrics_df, pd.DataFrame([average_metrics])], ignore_ind
 # Display the metrics for each fold and the averages
 print(metrics_df)
 # Save the DataFrame to a CSV file
-metrics_df.to_csv('./result output/KFold results of RF.csv', index=False)
+metrics_df.to_csv('KFold results of RF.csv', index=False)
