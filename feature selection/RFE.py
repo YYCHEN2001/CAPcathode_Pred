@@ -5,7 +5,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 
 # Load the cleaned dataset
-df = pd.read_csv('carbon_20240320.csv')
+df = pd.read_csv('../dataset/carbon_20240320.csv')
 
 # One-hot encode the categorical columns 'Electrolyte' and 'Current collector'
 df_encoded = pd.get_dummies(df, columns=['Electrolyte', 'Current collector'])
@@ -14,7 +14,7 @@ df_encoded = pd.get_dummies(df, columns=['Electrolyte', 'Current collector'])
 X = df_encoded.drop('Cs', axis=1)
 y = df_encoded['Cs']
 
-# Splitting the dataset into training and testing sets with a 80:20 ratio
+# Splitting the dataset into training and testing sets with an 80:20 ratio
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=21)
 
 # Initialize the estimator

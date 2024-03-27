@@ -8,21 +8,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
 # Load the cleaned dataset
-df = pd.read_csv('../../dataset/carbon_20240326_2.csv')
-
-# One-hot encode the categorical columns 'Electrolyte' and 'Current collector'
-df_encoded = pd.get_dummies(df, columns=['Electrolyte'])
-
-# Features and Target separation
-X = df_encoded.drop('Cs', axis=1)
-y = df_encoded['Cs']
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=21)
-
-# data standard
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
+from read_carbon import load_and_process_data
+X, y, X_train_scaled, X_test_scaled, y_train, y_test = load_and_process_data('../../dataset/carbon_20240326.csv')
 
 # Initialize the model with RandomForestRegressor
 rfr = RandomForestRegressor(n_estimators=2000,

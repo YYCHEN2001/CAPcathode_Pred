@@ -23,7 +23,7 @@ xgb = XGBRegressor(n_estimators=2000,
                    max_depth=3,
                    min_child_weight=1,
                    gamma=0.5,
-                   subsample=0.1,
+                   subsample=0.2,
                    reg_alpha=0.5,
                    reg_lambda=2,
                    random_state=21)

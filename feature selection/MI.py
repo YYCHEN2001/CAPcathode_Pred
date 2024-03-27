@@ -5,10 +5,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load the dataset
-data = pd.read_csv('carbon_20240320.csv')  # 请替换为您的数据集文件路径
+data = pd.read_csv('../dataset/carbon_20240326.csv')  # 请替换为您的数据集文件路径
 
 # Separate features; assuming the last column is the target
 X = data.iloc[:, :-1]
+
+X = X.drop(['Electrolyte'], axis=1)
+
 
 # Initialize the matrix to store mutual information values
 n_features = X.shape[1]
@@ -36,8 +39,9 @@ mi_matrix_continuous_lower_triangle = mi_matrix_continuous_df_rounded.where(
 print(mi_matrix_continuous_lower_triangle)
 
 # Plot the lower triangle of the mutual information matrix with a color map where higher values are darker
-plt.figure(figsize=(12, 10))
-sns.heatmap(mi_matrix_continuous_lower_triangle, annot=True, fmt=".3f", cmap="Blues",
+plt.figure(figsize=(12, 12))
+sns.heatmap(mi_matrix_continuous_lower_triangle,
+            annot=True, fmt=".3f", cmap="Blues",
             cbar_kws={'label': 'Mutual Information'}, mask=mi_matrix_continuous_lower_triangle.isnull())
 plt.title("Mutual Information between Features")
 plt.show()

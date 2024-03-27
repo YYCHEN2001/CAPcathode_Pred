@@ -1,15 +1,14 @@
-from sklearn.linear_model import Lasso, LassoCV
+import pandas as pd
+from sklearn.linear_model import LassoCV
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import root_mean_squared_error
-import pandas as pd
 
 # 加载数据
 # Load the cleaned dataset
-df = pd.read_csv('carbon_20240322.csv')
+df = pd.read_csv('../dataset/carbon_20240326.csv')
 
-# One-hot encode the categorical columns 'Electrolyte' and 'Current collector'
-df_encoded = pd.get_dummies(df, columns=['Electrolyte', 'Current collector'])
+# One-hot encode the categorical columns 'Electrolyte'
+df_encoded = pd.get_dummies(df, columns=['Electrolyte'])
 
 # Features and Target separation
 X = df_encoded.drop('Cs', axis=1)
