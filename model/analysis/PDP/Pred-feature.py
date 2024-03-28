@@ -21,5 +21,6 @@ xgb.fit(X_train, y_train)
 y_pred_train = xgb.predict(X_train)
 y_pred_test = xgb.predict(X_test)
 
-fig, summary_df = target_plot(test_df, 'I/m', 'Current density', 'Cs')
+fig, summary_df = predict_plot(xgb, test_df, base_features, 'DV', 'Potential_window', 'matplotlib')
 fig.show()
+

@@ -3,7 +3,8 @@ from kfold_cv import perform_kfold_cv
 from load_carbon import load
 
 # Load the cleaned dataset
-X, y = load('../../dataset/carbon_20240326_2.csv')
+X, y = load('../../dataset/carbon_20240326.csv')
+X = X.drop('DV', axis=1)
 
 # Initialize the model with XGBoost Regression
 xgb = XGBRegressor(n_estimators=2000,
@@ -21,4 +22,4 @@ metrics_df = perform_kfold_cv(xgb, X, y, n_splits=10, random_state=21)
 # Display the metrics for each fold and the averages
 print(metrics_df)
 # Save the DataFrame to a CSV file
-metrics_df.to_csv('KFold results of XGB.csv', index=False)
+metrics_df.to_csv('KFold results of XGB_drop_DV.csv', index=False)

@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 
-def load(filename):
+def load(filename, target='Cs'):
     """
     Load and process the dataset without splitting.
 
@@ -21,8 +21,8 @@ def load(filename):
     df_encoded = pd.get_dummies(df, columns=['Electrolyte'])
 
     # Features and Target separation
-    x = df_encoded.drop('Cs', axis=1)
-    y = df_encoded['Cs']
+    x = df_encoded.drop(target, axis=1)
+    y = df_encoded[target]
 
     return x, y
 

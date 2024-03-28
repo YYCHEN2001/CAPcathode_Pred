@@ -56,7 +56,7 @@ def combine_data(x_train, x_test, y_train, y_test, base_features):
     return train_df, test_df
 
 
-def target_plot(df, feature, feature_name, target):
+def target_plot(df, feature, feature_name, target, engine):
     """
     plot of Target distribution through a single feature
     """
@@ -73,8 +73,10 @@ def target_plot(df, feature, feature_name, target):
 
     fig, axes, summary_df = target_feature.plot(
         show_percentile=True,
+        figsize=(12, 10),
+        dpi=600,
         ncols=2,
-        engine='plotly',
+        engine=engine,
         template='plotly_white',
     )
     """
@@ -126,7 +128,7 @@ def target_plot(df, feature, feature_name, target):
     return fig, summary_df
 
 
-def predict_plot(model, df, model_features, feature, feature_name):
+def predict_plot(model, df, model_features, feature, feature_name, engine):
     """
     Check prediction distribution through a single feature
     """
@@ -134,20 +136,23 @@ def predict_plot(model, df, model_features, feature, feature_name):
         model=model,
         df=df,
         model_features=model_features,
+        n_classes=0,
         feature=feature,
         feature_name=feature_name,
     )
 
     fig, axes, summary_df = predict_feature.plot(
         ncols=2,
+        figsize=(12, 10),
+        dpi=600,
         plot_params={"gaps": {"inner_y": 0.05}},
-        engine='plotly',
+        engine=engine,
         template='plotly_white',
     )
     return fig, summary_df
 
 
-def pdp_feature_plot(model, df, model_features, feature, feature_name):
+def pdp_feature_plot(model, df, model_features, feature, feature_name, engine):
     """
     Partial dependence plot of a single feature
     """
@@ -170,17 +175,17 @@ def pdp_feature_plot(model, df, model_features, feature, feature_name):
         to_bins=False,
         show_percentile=True,
         which_classes=None,
-        figsize=None,
-        dpi=300,
+        figsize=(12, 10),
+        dpi=600,
         ncols=2,
         plot_params={"pdp_hl": True},
-        engine='matplotlib',
+        engine=engine,
         template='plotly_white',
     )
     return fig, summary_df
 
 
-def target_2d_plot(df, feature, feature_name, target):
+def target_2d_plot(df, feature, feature_name, target, engine):
     """
     Plot of Target distribution through a single feature.
 
@@ -216,17 +221,18 @@ def target_2d_plot(df, feature, feature_name, target):
 
     fig, axes, summary_df = target_1_2.plot(
         show_percentile=True,
-        figsize=None,
+        figsize=(12, 10),
+        dpi=600,
         ncols=2,
         annotate=True,
         plot_params={"subplot_ratio": {"y": [7, 0.8]}, "gaps": {"inner_y": 0.2}},
-        engine='plotly',
+        engine=engine,
         template='plotly_white',
     )
     return fig, summary_df
 
 
-def predict_2d_plot(model, df, model_features, features, feature_names):
+def predict_2d_plot(model, df, model_features, features, feature_names, engine):
     """
     Check prediction distribution through two features
 
@@ -255,14 +261,16 @@ def predict_2d_plot(model, df, model_features, features, feature_names):
 
     fig, axes, summary_df = predict_1_2.plot(
         ncols=2,
+        figsize=(12, 10),
+        dpi=600,
         plot_params={"gaps": {"inner_y": 0.05}},
-        engine='plotly',
+        engine=engine,
         template='plotly_white',
     )
     return fig, summary_df
 
 
-def pdp_contour_plot(model, df, model_features, features, feature_names):
+def pdp_contour_plot(model, df, model_features, features, feature_names, engine):
     """
     Partial dependence plot of two features
 
@@ -292,13 +300,13 @@ def pdp_contour_plot(model, df, model_features, features, feature_names):
         plot_type="contour",
         to_bins=True,
         plot_pdp=True,
-        show_percentile=True,
+        show_percentile=False,
         which_classes=None,
-        figsize=None,
-        dpi=300,
+        figsize=(12, 10),
+        dpi=600,
         ncols=2,
         plot_params=None,
-        engine="plotly",
+        engine=engine,
         template="plotly_white",
     )
     return fig
