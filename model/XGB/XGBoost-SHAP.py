@@ -1,25 +1,10 @@
-import pandas as pd
 import shap
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 from xgboost import XGBRegressor
+from load_carbon import load, split_scale
 
-# Load the cleaned dataset
-df = pd.read_csv('../../dataset/carbon_20240326_2.csv')
-
-# One-hot encode the categorical columns 'Electrolyte'
-df_encoded = pd.get_dummies(df, columns=['Electrolyte'])
-
-# Features and Target separation
-X = df_encoded.drop('Cs', axis=1)
-y = df_encoded['Cs']
-
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=21)
-
-# data standard
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
+# Load dataset
+X, y = load('../../dataset/carbon_20240326_2.csv')
+X_train_scaled, X_test_scaled, y_train, y_test = split_scale(X, y, scale_data=False, test_size=0.3, random_state=21)
 
 # Initialize the model with XGBoost Regression
 xgb = XGBRegressor(n_estimators=2000,
@@ -40,5 +25,5 @@ explainer = shap.Explainer(xgb)
 shap_values = explainer(X_train_scaled)
 
 # Plot summary of SHAP values
-shap.summary_plot(shap_values, X_train, plot_type="bar")
-shap.summary_plot(shap_values, X_train)
+shap.summary_plot(shap_values, X_train_scaled, max_display=8, plot_type="bar", plot_size=(12, 10))
+shap.summary_plot(shap_values, X_train_scaled, max_display=8, plot_size=(12, 10))

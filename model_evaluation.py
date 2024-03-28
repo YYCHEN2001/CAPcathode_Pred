@@ -60,10 +60,10 @@ def plot_actual_vs_predicted(y_train, y_pred_train, y_test, y_pred_test):
 
     plt.plot([padded_min, padded_max], [padded_min, padded_max], 'k--', lw=3, label='Regression Line')
 
-    plt.title('Actual vs Predicted Values')
-    plt.xlabel('Actual Values')
-    plt.ylabel('Predicted Values')
-    plt.legend()
+    plt.title('Actual vs Predicted Values', size=32)
+    plt.xlabel('Actual Values', size=24)
+    plt.ylabel('Predicted Values', size=24)
+    plt.legend(fontsize=20)
 
     # 设置坐标轴范围使得横纵坐标一致
     plt.axis('equal')

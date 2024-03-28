@@ -77,6 +77,52 @@ def target_plot(df, feature, feature_name, target):
         engine='plotly',
         template='plotly_white',
     )
+    """
+    Parameters
+        ----------
+        center : bool, optional
+            If True, the PDP will be centered by deducting the values of `grids[0]`.
+            Default is True.
+        plot_lines : bool, optional
+            If True, ICE lines will be plotted. Default is False.
+        frac_to_plot : int or float, optional
+            Fraction of ICE lines to plot. Default is 1.
+        cluster : bool, optional
+            If True, ICE lines will be clustered. Default is False.
+        n_cluster_centers : int or None, optional
+            Number of cluster centers. Need to provide when `cluster` is True. Default
+            is None.
+        cluster_method : {'accurate', 'approx'}, optional
+            Method for clustering. If 'accurate', use KMeans. If 'approx', use
+            MiniBatchKMeans. Default is accurate.
+        plot_pts_dist : bool, optional
+            If True, distribution of points will be plotted. Default is False.
+        to_bins : bool, optional
+            If True, the axis will be converted to bins. Only applicable for numeric
+            feature. Default is False.
+        show_percentile : bool, optional
+            If True, percentiles are shown in the plot. Default is False.
+        which_classes : list of int, optional
+            List of class indices to plot. If None, all classes will be plotted.
+            Default is None.
+        figsize : tuple or None, optional
+            The figure size for matplotlib or plotly figure. If None, the default
+            figure size is used. Default is None.
+        dpi : int, optional
+            The resolution of the plot, measured in dots per inch. Only applicable when
+            `engine` is 'matplotlib'. Default is 300.
+        ncols : int, optional
+            The number of columns of subplots in the figure. Default is 2.
+        plot_params : dict or None, optional
+            Custom plot parameters that control the style and aesthetics of the plot.
+            Default is None.
+        engine : {'matplotlib', 'plotly'}, optional
+            The plotting engine to use. Default is plotly.
+        template : str, optional
+            The template to use for plotly plots. Only applicable when `engine` is
+            'plotly'. Reference: https://plotly.com/python/templates/ Default is
+            plotly_white.
+    """
     return fig, summary_df
 
 

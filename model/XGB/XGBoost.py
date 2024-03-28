@@ -3,7 +3,7 @@ from xgboost import XGBRegressor
 from model_evaluation import train_evaluate, plot_actual_vs_predicted
 
 # Load dataset
-X, y = load('../../dataset/carbon_20240326.csv')
+X, y = load('../../dataset/carbon_20240326_2.csv')
 X_train_scaled, X_test_scaled, y_train, y_test = split_scale(X, y, scale_data=False, test_size=0.3, random_state=21)
 
 # Initialize the model with XGBoost Regression
