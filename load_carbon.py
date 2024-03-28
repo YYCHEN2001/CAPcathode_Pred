@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
+
 def load(filename):
     """
     Load and process the dataset without splitting.
@@ -20,12 +21,13 @@ def load(filename):
     df_encoded = pd.get_dummies(df, columns=['Electrolyte'])
 
     # Features and Target separation
-    X = df_encoded.drop('Cs', axis=1)
+    x = df_encoded.drop('Cs', axis=1)
     y = df_encoded['Cs']
 
-    return X, y
+    return x, y
 
-def split_scale(X, y, scale_data=False, test_size=0.3, random_state=21):
+
+def split_scale(x, y, scale_data=False, test_size=0.3, random_state=21):
     """
     Split and optionally scale the data.
 
@@ -44,12 +46,12 @@ def split_scale(X, y, scale_data=False, test_size=0.3, random_state=21):
     - X_train_scaled (optional): Scaled training features.
     - X_test_scaled (optional): Scaled test features.
     """
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=random_state)
 
     if scale_data:
         scaler = StandardScaler()
-        X_train_scaled = scaler.fit_transform(X_train)
-        X_test_scaled = scaler.transform(X_test)
-        return X_train_scaled, X_test_scaled, y_train, y_test
+        x_train_scaled = scaler.fit_transform(x_train)
+        x_test_scaled = scaler.transform(x_test)
+        return x_train_scaled, x_test_scaled, y_train, y_test
     else:
-        return X_train, X_test, y_train, y_test
+        return x_train, x_test, y_train, y_test

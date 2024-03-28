@@ -3,7 +3,7 @@ from sklearn.model_selection import KFold
 from sklearn.metrics import r2_score, mean_absolute_error, root_mean_squared_error, mean_absolute_percentage_error
 
 
-def perform_kfold_cv(model, X, y, n_splits=10, random_state=21):
+def perform_kfold_cv(model, x, y, n_splits=10, random_state=21):
     """
     Perform K-Fold Cross Validation.
 
@@ -21,15 +21,15 @@ def perform_kfold_cv(model, X, y, n_splits=10, random_state=21):
     metrics_df = pd.DataFrame(columns=['Fold', 'R2', 'MAE', 'MAPE', 'RMSE'])
     rows = []
 
-    for fold, (train_index, test_index) in enumerate(kf.split(X), start=1):
-        X_train, X_test = X.iloc[train_index], X.iloc[test_index]
+    for fold, (train_index, test_index) in enumerate(kf.split(x), start=1):
+        x_train, x_test = x.iloc[train_index], x.iloc[test_index]
         y_train, y_test = y.iloc[train_index], y.iloc[test_index]
 
         # Fit the model
-        model.fit(X_train, y_train)
+        model.fit(x_train, y_train)
 
         # Predict
-        y_pred = model.predict(X_test)
+        y_pred = model.predict(x_test)
 
         # Calculate and store metrics
         rows.append({

@@ -16,16 +16,16 @@ def calculate_metrics(y_true, y_pred):
     return r2, mae, mape, rmse
 
 
-def train_evaluate(model, X_train_scaled, y_train, X_test_scaled, y_test):
+def train_evaluate(model, x_train_scaled, y_train, x_test_scaled, y_test):
     """
     Train the model and evaluate it on both training and test sets.
     """
     # Train the model
-    model.fit(X_train_scaled, y_train)
+    model.fit(x_train_scaled, y_train)
 
     # Predictions
-    y_pred_train = model.predict(X_train_scaled)
-    y_pred_test = model.predict(X_test_scaled)
+    y_pred_train = model.predict(x_train_scaled)
+    y_pred_test = model.predict(x_test_scaled)
 
     # Calculate metrics
     metrics_train = calculate_metrics(y_train, y_pred_train)
@@ -39,9 +39,6 @@ def train_evaluate(model, X_train_scaled, y_train, X_test_scaled, y_test):
     })
 
     return results
-
-    # Plotting
-    plot_actual_vs_predicted(y_train, y_pred_train, y_test, y_pred_test)
 
 
 def plot_actual_vs_predicted(y_train, y_pred_train, y_test, y_pred_test):
