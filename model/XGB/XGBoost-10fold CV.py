@@ -3,17 +3,17 @@ from kfold_cv import perform_kfold_cv
 from load_carbon import load
 
 # Load the cleaned dataset
-X, y = load('../../dataset/carbon_20240326_2.csv')
+X, y = load('../../dataset/carbon_20240404.csv')
 
 # Initialize the model with XGBoost Regression
-xgb = XGBRegressor(n_estimators=2000,
-                   learning_rate=0.14,
-                   max_depth=3,
-                   min_child_weight=1,
-                   gamma=0.5,
+xgb = XGBRegressor(n_estimators=200,
+                   learning_rate=0.15,
+                   max_depth=5,
+                   min_child_weight=2,
+                   gamma=0.3,
                    subsample=0.2,
-                   reg_alpha=0.5,
-                   reg_lambda=2,
+                   reg_alpha=0.8,
+                   reg_lambda=1,
                    random_state=21)
 
 metrics_df = perform_kfold_cv(xgb, X, y, n_splits=10, random_state=21)

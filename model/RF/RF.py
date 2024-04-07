@@ -7,8 +7,8 @@ X, y = load('../../dataset/carbon_20240326_2.csv')
 X_train_scaled, X_test_scaled, y_train, y_test = split_scale(X, y, scale_data=False, test_size=0.3, random_state=21)
 
 # Initialize the model with RandomForestRegressor
-rfr = RandomForestRegressor(n_estimators=2000,
-                            max_depth=9,
+rfr = RandomForestRegressor(n_estimators=50,
+                            max_depth=12,
                             min_samples_leaf=1,
                             min_samples_split=2,
                             random_state=21)

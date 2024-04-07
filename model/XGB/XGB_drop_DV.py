@@ -8,8 +8,8 @@ X = X.drop('DV', axis=1)
 X_train_scaled, X_test_scaled, y_train, y_test = split_scale(X, y, scale_data=False, test_size=0.3, random_state=21)
 
 # Initialize the model with XGBoost Regression
-xgb = XGBRegressor(n_estimators=2000,
-                   learning_rate=0.15,
+xgb = XGBRegressor(n_estimators=200,
+                   learning_rate=0.2,
                    max_depth=3,
                    min_child_weight=1,
                    gamma=0.5,

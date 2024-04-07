@@ -3,18 +3,18 @@ from xgboost import XGBRegressor
 from model_evaluation import train_evaluate, plot_actual_vs_predicted
 
 # Load dataset
-X, y = load('../../dataset/carbon_20240326_2.csv')
+X, y = load('../../dataset/carbon_20240404.csv')
 X_train_scaled, X_test_scaled, y_train, y_test = split_scale(X, y, scale_data=False, test_size=0.3, random_state=21)
 
 # Initialize the model with XGBoost Regression
-xgb = XGBRegressor(n_estimators=2000,
-                   learning_rate=0.17,
-                   max_depth=3,
+xgb = XGBRegressor(n_estimators=100,
+                   learning_rate=0.25,
+                   max_depth=12,
                    min_child_weight=1,
                    gamma=0.5,
                    subsample=0.2,
-                   reg_alpha=0.5,
-                   reg_lambda=2,
+                   reg_alpha=0.8,
+                   reg_lambda=1,
                    random_state=21)
 
 # Train and evaluate the model

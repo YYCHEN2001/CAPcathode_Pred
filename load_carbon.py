@@ -18,7 +18,7 @@ def load(filename, target='Cs'):
     df = pd.read_csv(filename)
 
     # One-hot encode the categorical columns 'Electrolyte'
-    df_encoded = pd.get_dummies(df, columns=['Electrolyte'])
+    df_encoded = pd.get_dummies(df, columns=['Electrolyte', 'Current collector'])
 
     # Features and Target separation
     x = df_encoded.drop(target, axis=1)

@@ -6,8 +6,8 @@ from load_carbon import load
 X, y = load('../../dataset/carbon_20240326.csv')
 
 # Initialize the model with RandomForestRegressor
-rfr = RandomForestRegressor(n_estimators=2000,
-                            max_depth=9,
+rfr = RandomForestRegressor(n_estimators=50,
+                            max_depth=12,
                             min_samples_leaf=1,
                             min_samples_split=2,
                             random_state=21)

@@ -7,8 +7,8 @@ X, y = load('../../dataset/carbon_20240326.csv')
 X = X.drop('DV', axis=1)
 
 # Initialize the model with XGBoost Regression
-xgb = XGBRegressor(n_estimators=2000,
-                   learning_rate=0.14,
+xgb = XGBRegressor(n_estimators=500,
+                   learning_rate=0.15,
                    max_depth=3,
                    min_child_weight=1,
                    gamma=0.5,
