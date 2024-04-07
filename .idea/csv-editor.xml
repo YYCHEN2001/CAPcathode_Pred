@@ -10,6 +10,27 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\dataset\carbon_20240322.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\dataset\carbon_20240326.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\dataset\carbon_20240326_2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\dataset\carbon_20240404.csv">
           <value>
             <Attribute>

@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import StandardScaler
 
 
@@ -17,11 +18,11 @@ def data_load(filename, target='Cs'):
     # Load the cleaned dataset
     df = pd.read_csv(filename)
 
-    # Drop the 'Current Collector' column
-    df_1 = df.drop('Current collector', axis=1)
+    # # Drop the 'Current Collector' column
+    # df_1 = df.drop('Current collector', axis=1)
 
     # One-hot encode the categorical columns 'Electrolyte'
-    df_encoded = pd.get_dummies(df_1, columns=['Electrolyte'])
+    df_encoded = pd.get_dummies(df, columns=['Electrolyte', 'Current collector'])
 
     # Fill the missing values in the 'Active mass loading' column
     df_encoded['Active mass loading'] = df_encoded['Active mass loading'].fillna(1.5)
@@ -52,25 +53,21 @@ def data_split(x, y, test_size=0.3, random_state=21):
     return x_train, x_test, y_train, y_test
 
 
-def feature_scaling(x_train, x_test):
-    """
-    Scale the features using StandardScaler.
-
-    Parameters:
-    - x_train: Features DataFrame of the training set.
-    - x_test: Features DataFrame of the testing set.
-
-    Returns:
-    - x_train_scaled: Scaled Features DataFrame of the training set.
-    - x_test_scaled: Scaled Features DataFrame of the testing set.
-    """
-    # Initialize the StandardScaler
+def feature_standard(x):
     scaler = StandardScaler()
+    x_standard = scaler.fit_transform(x)
+    return x_standard
 
-    # Fit and transform the training set
-    x_train_scaled = scaler.fit_transform(x_train)
 
-    # Transform the testing set
-    x_test_scaled = scaler.transform(x_test)
+def feature_normalize(x):
+    scaler = MinMaxScaler()
+    x_normalized = scaler.fit_transform(x)
+    return x_normalized
 
-    return x_train_scaled, x_test_scaled
+
+def target_normalize(y):
+    scaler = MinMaxScaler()
+    y_df = y.to_frame()
+    y_normalized_array = scaler.fit_transform(y_df)
+    y_normalized = pd.Series(y_normalized_array.flatten())
+    return y_normalized

@@ -1,13 +1,18 @@
 from sklearn.ensemble import GradientBoostingRegressor
 
-from dataset_function import data_load, data_split
+from dataset_function import data_load, data_split, feature_normalize
 from model_evaluation import train_evaluate, plot_actual_vs_predicted
 
 # Load dataset
 X, y = data_load('../../dataset/carbon_20240404.csv')
 
+# Normalize the features
+X_normalized = feature_normalize(X)
+
+print(X_normalized)
+
 # Split the dataset
-X_train, X_test, y_train, y_test = data_split(X, y, test_size=0.2, random_state=21)
+X_train, X_test, y_train, y_test = data_split(X_normalized, y, test_size=0.2, random_state=21)
 
 # Initialize the model with Gradient Boosting Regression
 gbr = GradientBoostingRegressor(n_estimators=200,
