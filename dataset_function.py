@@ -4,7 +4,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import StandardScaler
 
 
-def data_load(filename, target='Cs'):
+def dataset_load(filename):
     """
     Load and process the dataset without splitting.
 
@@ -26,30 +26,44 @@ def data_load(filename, target='Cs'):
 
     # Fill the missing values in the 'Active mass loading' column
     df_encoded['Active mass loading'] = df_encoded['Active mass loading'].fillna(1.5)
-
-    # Features and Target separation
-    x = df_encoded.drop(target, axis=1)
-    y = df_encoded[target]
-    return x, y
+    return df_encoded
 
 
-def data_split(x, y, test_size=0.3, random_state=21):
+def dataset_split(df, test_size=0.3, random_state=21, target='Cs'):
     """
-    Split the dataset into training and testing sets.
+    Split the dataset into training and testing sets, using quantile-based stratification for the target variable.
 
     Parameters:
-    - x: Features DataFrame.
-    - y: Target Series.
-    - test_size: float, the proportion of the dataset to include in the test split.
-    - random_state: int, the seed used by the random number generator.
+    - df: DataFrame, the dataset.
+    - test_size: float, the proportion of the testing set.
+    - random_state: int, the random state.
+    - target: str, the name of the target column.
 
     Returns:
-    - x_train: Features DataFrame of the training set.
-    - x_test: Features DataFrame of the testing set.
-    - y_train: Target Series of the training set.
-    - y_test: Target Series of the testing set.
+    - x_train: DataFrame containing the features for the training set.
+    - x_test: DataFrame containing the features for the testing set.
+    - y_train: Series containing the target for the training set.
+    - y_test: Series containing the target for the testing set.
     """
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=random_state)
+    # Rename the target column to 'target' for consistency
+    if target != 'target':
+        df = df.rename(columns={target: 'target'})
+
+    # Use quantiles to define 10 intervals for the target value
+    df['target_class'] = pd.qcut(df['target'], q=10, labels=False)
+
+    # Splitting the dataset
+    # Exclude 'target' and 'target_class' from the features
+    x = df.drop(['target', 'target_class'], axis=1)
+    y = df['target']
+    stratify_column = df['target_class']
+
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=test_size,
+                                                        random_state=random_state,
+                                                        stratify=stratify_column)
+    # Remove the 'target_class' column to clean up
+    df.drop(['target_class'], axis=1, inplace=True)
+
     return x_train, x_test, y_train, y_test
 
 

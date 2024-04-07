@@ -1,19 +1,14 @@
 from sklearn.kernel_ridge import KernelRidge
 
-from dataset_function import data_load, data_split, feature_normalize
+from dataset_function import dataset_load, dataset_split
 from model_evaluation import train_evaluate, plot_actual_vs_predicted
 
-# Load dataset
-X, y = data_load('../../dataset/carbon_20240404.csv')
-
-# Normalize the features
-X_normalized = feature_normalize(X)
-
-# Split the dataset
-X_train, X_test, y_train, y_test = data_split(X, y, test_size=0.2, random_state=21)
+# Split the dataset into training and testing sets, using quantile-based stratification for the target variable.
+df = dataset_load('../../dataset/carbon_202404.csv')
+X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.2, random_state=21, target='Cs')
 
 # Initialize the model with Gradient Boosting Regression
-krr = KernelRidge(alpha=0.01,
+krr = KernelRidge(alpha=0.1,
                   gamma=0.1,
                   kernel='polynomial',
                   degree=2,

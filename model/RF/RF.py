@@ -1,17 +1,15 @@
 from sklearn.ensemble import RandomForestRegressor
 
-from dataset_function import data_load, data_split
+from dataset_function import dataset_load, dataset_split
 from model_evaluation import train_evaluate, plot_actual_vs_predicted
 
-# Load dataset
-X, y = data_load('../../dataset/carbon_20240404.csv')
-
-# Split the dataset
-X_train, X_test, y_train, y_test = data_split(X, y, test_size=0.2, random_state=21)
+# Split the dataset into training and testing sets, using quantile-based stratification for the target variable.
+df = dataset_load('../../dataset/carbon_202404_v2.csv')
+X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.2, random_state=21, target='Cs')
 
 # Initialize the model with RandomForestRegressor
 rfr = RandomForestRegressor(n_estimators=100,
-                            max_depth=12,
+                            max_depth=15,
                             min_samples_leaf=1,
                             min_samples_split=2,
                             random_state=21)
