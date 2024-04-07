@@ -1,9 +1,10 @@
 from lightgbm import LGBMRegressor
+
+from dataset_function import data_load
 from kfold_cv import perform_kfold_cv
-from load_carbon import load
 
 # Load the cleaned dataset
-X, y = load('../../dataset/carbon_20240326.csv')
+X, y = data_load('../../dataset/carbon_20240404.csv')
 
 # Initialize the model with LightGBM Regression
 lgbm = LGBMRegressor(min_child_samples=2,

@@ -1,16 +1,20 @@
 from xgboost import XGBRegressor
+
+from dataset_function import data_load, data_split
 from kfold_cv import perform_kfold_cv
-from load_carbon import load
 
 # Load the cleaned dataset
-X, y = load('../../dataset/carbon_20240404.csv')
+X, y = data_load('../../dataset/carbon_20240404.csv')
+
+# Split the dataset
+X_train, X_test, y_train, y_test = data_split(X, y, test_size=0.15, random_state=21)
 
 # Initialize the model with XGBoost Regression
-xgb = XGBRegressor(n_estimators=200,
-                   learning_rate=0.15,
-                   max_depth=5,
-                   min_child_weight=2,
-                   gamma=0.3,
+xgb = XGBRegressor(n_estimators=100,
+                   learning_rate=0.2,
+                   max_depth=8,
+                   min_child_weight=1,
+                   gamma=0.5,
                    subsample=0.2,
                    reg_alpha=0.8,
                    reg_lambda=1,

@@ -1,11 +1,11 @@
 import pandas as pd
 import shap
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import GradientBoostingRegressor
 
 # Load the cleaned dataset
-df = pd.read_csv('../../dataset/carbon_20240326_2.csv')
+df = pd.read_csv('../../dataset/carbon_20240404.csv')
 
 # One-hot encode the categorical columns 'Electrolyte'
 df_encoded = pd.get_dummies(df, columns=['Electrolyte'])

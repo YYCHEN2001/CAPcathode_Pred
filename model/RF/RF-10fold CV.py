@@ -1,9 +1,9 @@
 from sklearn.ensemble import RandomForestRegressor
+
+from dataset_function import data_load
 from kfold_cv import perform_kfold_cv
 
-# Load the cleaned dataset
-from load_carbon import load
-X, y = load('../../dataset/carbon_20240326.csv')
+X, y = data_load('../../dataset/carbon_20240326.csv')
 
 # Initialize the model with RandomForestRegressor
 rfr = RandomForestRegressor(n_estimators=50,

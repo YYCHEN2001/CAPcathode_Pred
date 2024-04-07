@@ -1,12 +1,13 @@
 from sklearn.ensemble import GradientBoostingRegressor
+
+from dataset_function import data_load
 from kfold_cv import perform_kfold_cv
-from load_carbon import load
 
 # Load the cleaned dataset
-X, y = load('../../dataset/carbon_20240326_2.csv')
+X, y = data_load('../../dataset/carbon_20240404.csv')
 
 # Initialize the model with Gradient Boosting Regression
-gbr = GradientBoostingRegressor(n_estimators=50,
+gbr = GradientBoostingRegressor(n_estimators=200,
                                 learning_rate=0.26,
                                 max_depth=5,
                                 min_samples_leaf=8,
