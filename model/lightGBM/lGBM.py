@@ -6,7 +6,7 @@ from model_evaluation import train_evaluate, plot_actual_vs_predicted
 # Split the dataset into training and testing sets, using quantile-based stratification for the target variable.
 df = dataset_load('../../dataset/carbon_202404_v2.csv')
 
-X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.2, random_state=21, target='Cs')
+X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.3, random_state=21, target='Cs')
 
 # Initialize the model with LightGBM Regression
 lgbm = LGBMRegressor(n_estimators=300,

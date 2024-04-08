@@ -5,14 +5,14 @@ from model_evaluation import train_evaluate, plot_actual_vs_predicted
 
 # Split the dataset into training and testing sets, using quantile-based stratification for the target variable.
 df = dataset_load('../../dataset/carbon_202404_v2.csv')
-X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.2, random_state=21, target='Cs')
+X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.3, random_state=21, target='Cs')
 
 # Initialize the model with Gradient Boosting Regression
-krr = KernelRidge(alpha=0.1,
+krr = KernelRidge(alpha=0.8,
                   gamma=0.1,
                   kernel='polynomial',
                   degree=2,
-                  coef0=2.5)
+                  coef0=7.7)
 
 # Train and evaluate the model
 results = train_evaluate(krr, X_train, y_train, X_test, y_test)

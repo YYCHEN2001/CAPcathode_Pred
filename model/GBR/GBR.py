@@ -6,14 +6,16 @@ from model_evaluation import train_evaluate, plot_actual_vs_predicted
 # Split the dataset into training and testing sets, using quantile-based stratification for the target variable.
 df = dataset_load('../../dataset/carbon_202404_v2.csv')
 
-X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.2, random_state=21, target='Cs')
+X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.3, random_state=21, target='Cs')
 
 # Initialize the model with Gradient Boosting Regression
-gbr = GradientBoostingRegressor(n_estimators=300,
-                                learning_rate=0.18,
-                                max_depth=4,
-                                min_samples_leaf=4,
-                                min_samples_split=2,
+gbr = GradientBoostingRegressor(n_estimators=900,
+                                learning_rate=0.1,
+                                max_depth=13,
+                                min_samples_leaf=6,
+                                min_samples_split=7,
+                                subsample=0.8,
+                                max_features=0.12,
                                 random_state=21)
 
 # Train and evaluate the model
