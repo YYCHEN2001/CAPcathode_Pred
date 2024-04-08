@@ -12,19 +12,19 @@ X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.2, random_state
 
 # 设置参数网格
 param_grid = {
-    # 'learning_rate': np.arange(0.2, 0.26, 0.01),
+    'learning_rate': np.arange(0.12, 0.22, 0.02),
     'max_depth': np.arange(3, 6, 1),
     'min_samples_leaf': np.arange(3, 6, 1),
-    'min_samples_split': np.arange(2, 5, 1),
+    'min_samples_split': np.arange(2, 4, 1),
     # 'alpha': [0.001, 0.002, 0.005]
 }
 
 # 初始化模型
-gbr = GradientBoostingRegressor(n_estimators=100,
-                                learning_rate=0.23,
-                                max_depth=4,
-                                min_samples_leaf=4,
-                                min_samples_split=2,
+gbr = GradientBoostingRegressor(n_estimators=300,
+                                # learning_rate=0.28,
+                                # max_depth=4,
+                                # min_samples_leaf=4,
+                                # min_samples_split=2,
                                 alpha=0.001,
                                 random_state=21)
 

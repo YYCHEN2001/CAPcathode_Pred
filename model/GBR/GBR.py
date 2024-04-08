@@ -9,12 +9,11 @@ df = dataset_load('../../dataset/carbon_202404_v2.csv')
 X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.2, random_state=21, target='Cs')
 
 # Initialize the model with Gradient Boosting Regression
-gbr = GradientBoostingRegressor(n_estimators=100,
-                                learning_rate=0.23,
+gbr = GradientBoostingRegressor(n_estimators=300,
+                                learning_rate=0.18,
                                 max_depth=4,
                                 min_samples_leaf=4,
                                 min_samples_split=2,
-                                alpha=0.001,
                                 random_state=21)
 
 # Train and evaluate the model

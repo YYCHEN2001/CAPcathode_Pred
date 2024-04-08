@@ -12,15 +12,17 @@ X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.2, random_state
 
 # 设置参数网格
 param_grid = {
-    'max_depth': np.arange(13, 18, 1),
-    # 'min_samples_leaf': np.arange(1, 5, 1),
-    # 'min_samples_split': np.arange(2, 6, 1)
+    'n_estimators': [200, 300, 400],
+    'max_depth': np.arange(8, 12, 1),
+    'min_samples_leaf': np.arange(1, 4, 1),
+    'min_samples_split': np.arange(2, 5, 1)
 }
 
 # 初始化模型
-rfr = RandomForestRegressor(n_estimators=100,
-                            min_samples_leaf=1,
-                            min_samples_split=2,
+rfr = RandomForestRegressor(
+    # n_estimators=100,
+    # min_samples_leaf=1,
+    # min_samples_split=2,
                             random_state=21)
 
 # 设置交叉验证
