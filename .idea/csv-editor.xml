@@ -3,20 +3,6 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="\dataset\carbon_20240320.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\dataset\carbon_20240322.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="\dataset\carbon_20240326.csv">
           <value>
             <Attribute>
@@ -31,7 +17,14 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\dataset\carbon_20240404.csv">
+        <entry key="\dataset\carbon_202404.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\dataset\carbon_202404_v2.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

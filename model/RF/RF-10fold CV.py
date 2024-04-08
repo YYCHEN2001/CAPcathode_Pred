@@ -4,7 +4,7 @@ from dataset_function import dataset_load, dataset_split
 from kfold_cv import perform_kfold_cv
 
 # Split the dataset into training and testing sets, using quantile-based stratification for the target variable.
-df = dataset_load('../../dataset/carbon_202404.csv')
+df = dataset_load('../../dataset/carbon_202404_v2.csv')
 X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.2, random_state=21, target='Cs')
 
 # Initialize the model with RandomForestRegressor
