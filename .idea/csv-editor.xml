@@ -38,20 +38,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\model\GBR\test_set_with_predictions_and_errors.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\model\XGB\test_set_with_predictions_and_errors.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
       </map>
     </option>
   </component>
