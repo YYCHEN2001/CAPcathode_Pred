@@ -2,10 +2,10 @@ import numpy as np
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import GridSearchCV, KFold
 
-from dataset_function import dataset_load, dataset_split
+from dataset_function_for_v3 import dataset_load, dataset_split
 
 # Load dataset
-df = dataset_load('../../dataset/carbon_202404_v2.csv')
+df = dataset_load('../../dataset/carbon_202404_v3.csv')
 
 # Split the dataset into training and testing sets, using quantile-based stratification for the target variable.
 X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.3, random_state=21, target='Cs')
@@ -20,8 +20,8 @@ param_grid = {
 }
 
 # 初始化模型
-gbr = GradientBoostingRegressor(n_estimators=300,
-                                # learning_rate=0.28,
+gbr = GradientBoostingRegressor(n_estimators=200,
+                                # learning_rate=0.1,
                                 # max_depth=4,
                                 # min_samples_leaf=4,
                                 # min_samples_split=2,
