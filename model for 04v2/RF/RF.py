@@ -8,7 +8,7 @@ df = dataset_load('../../dataset/carbon_202404_v2.csv')
 X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.3, random_state=21, target='Cs')
 
 # Initialize the model with RandomForestRegressor
-rfr = RandomForestRegressor(n_estimators=400,
+rfr = RandomForestRegressor(n_estimators=200,
                             max_depth=15,
                             min_samples_leaf=1,
                             min_samples_split=2,

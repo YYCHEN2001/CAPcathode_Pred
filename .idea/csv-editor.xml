@@ -38,6 +38,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\dataset\carbon_202404_v4.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

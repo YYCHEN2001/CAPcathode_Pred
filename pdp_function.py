@@ -1,29 +1,5 @@
 import pandas as pd
 from pdpbox import info_plots, pdp
-from sklearn.model_selection import train_test_split
-
-
-def load_split_data(filename, target, test_size=0.3, random_state=21):
-    """
-    Load data and split it into training and testing sets.
-    Args:
-    - filename: str, the name of the data file to load.
-    - test_size: float, the proportion of the dataset to include in the test split.
-    - random_state: int, the seed used by the random number generator.
-
-    Returns:
-    - X_train, X_test, y_train, y_test: Split datasets.
-    - base_features: list, the feature names of the dataset.
-    """
-    # Assuming load function is defined to load data
-    data = pd.read_csv(filename)
-    x = data.drop(target, axis=1)
-    y = data[target]
-
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=test_size, random_state=random_state)
-    base_features = x_train.columns.tolist()
-
-    return x_train, x_test, y_train, y_test, base_features
 
 
 def combine_data(x_train, x_test, y_train, y_test, base_features):
@@ -74,7 +50,7 @@ def target_plot(df, feature, feature_name, target, engine):
     fig, axes, summary_df = target_feature.plot(
         show_percentile=True,
         figsize=(12, 10),
-        dpi=600,
+        dpi=300,
         ncols=2,
         engine=engine,
         template='plotly_white',
@@ -134,6 +110,7 @@ def predict_plot(model, df, model_features, feature, feature_name, engine):
     """
     predict_feature = info_plots.PredictPlot(
         model=model,
+        num_grid_points=10,
         df=df,
         model_features=model_features,
         n_classes=0,
@@ -143,8 +120,8 @@ def predict_plot(model, df, model_features, feature, feature_name, engine):
 
     fig, axes, summary_df = predict_feature.plot(
         ncols=2,
-        figsize=(12, 10),
-        dpi=600,
+        figsize=(25.6, 14.4),
+        dpi=300,
         plot_params={"gaps": {"inner_y": 0.05}},
         engine=engine,
         template='plotly_white',
@@ -176,7 +153,7 @@ def pdp_feature_plot(model, df, model_features, feature, feature_name, engine):
         show_percentile=True,
         which_classes=None,
         figsize=(12, 10),
-        dpi=600,
+        dpi=300,
         ncols=2,
         plot_params={"pdp_hl": True},
         engine=engine,
@@ -222,7 +199,7 @@ def target_2d_plot(df, feature, feature_name, target, engine):
     fig, axes, summary_df = target_1_2.plot(
         show_percentile=True,
         figsize=(12, 10),
-        dpi=600,
+        dpi=300,
         ncols=2,
         annotate=True,
         plot_params={"subplot_ratio": {"y": [7, 0.8]}, "gaps": {"inner_y": 0.2}},
@@ -262,7 +239,7 @@ def predict_2d_plot(model, df, model_features, features, feature_names, engine):
     fig, axes, summary_df = predict_1_2.plot(
         ncols=2,
         figsize=(12, 10),
-        dpi=600,
+        dpi=300,
         plot_params={"gaps": {"inner_y": 0.05}},
         engine=engine,
         template='plotly_white',
@@ -270,7 +247,7 @@ def predict_2d_plot(model, df, model_features, features, feature_names, engine):
     return fig, summary_df
 
 
-def pdp_contour_plot(model, df, model_features, features, feature_names, engine):
+def pdp_contour_plot(model, df, model_features, features, feature_names, num_grid_points, engine):
     """
     Partial dependence plot of two features
 
@@ -289,6 +266,7 @@ def pdp_contour_plot(model, df, model_features, features, feature_names, engine)
 
     pdp_inter = pdp.PDPInteract(
         model=model,
+        num_grid_points=num_grid_points,
         df=df,
         model_features=model_features,
         n_classes=0,
@@ -303,7 +281,7 @@ def pdp_contour_plot(model, df, model_features, features, feature_names, engine)
         show_percentile=False,
         which_classes=None,
         figsize=(12, 10),
-        dpi=600,
+        dpi=300,
         ncols=2,
         plot_params=None,
         engine=engine,

@@ -23,7 +23,7 @@ def objective(params):
 
 
 # Define the hyperparameter configuration space
-space = {'n_estimators': hp.quniform('n_estimators', 100, 500, 100),
+space = {'n_estimators': hp.quniform('n_estimators', 10, 200, 10),
          'max_depth': hp.quniform('max_depth', 3, 15, 1),
          'min_samples_leaf': hp.quniform('min_samples_leaf', 1, 10, 1),
          'min_samples_split': hp.quniform('min_samples_split', 2, 10, 1)}

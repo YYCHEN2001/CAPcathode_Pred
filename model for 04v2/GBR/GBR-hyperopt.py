@@ -14,6 +14,7 @@ def objective(params):
     gbr = GradientBoostingRegressor(
         n_estimators=int(params['n_estimators']),
         max_depth=int(params['max_depth']),
+        alpha=params['alpha'],
         min_samples_split=int(params['min_samples_split']),
         min_samples_leaf=int(params['min_samples_leaf']),
         learning_rate=params['learning_rate'],
@@ -27,7 +28,8 @@ def objective(params):
 
 # Define the hyperparameter configuration space
 space = {
-    'n_estimators': hp.quniform('n_estimators', 200, 1000, 100),
+    'n_estimators': hp.quniform('n_estimators', 50, 300, 10),
+    'alpha': hp.uniform('alpha', 0.001, 0.1),
     'max_depth': hp.quniform('max_depth', 3, 18, 1),
     'min_samples_split': hp.quniform('min_samples_split', 2, 10, 1),
     'min_samples_leaf': hp.quniform('min_samples_leaf', 1, 10, 1),
@@ -40,17 +42,16 @@ trials = Trials()
 best = fmin(fn=objective,
             space=space,
             algo=tpe.suggest,
-            max_evals=100,
+            max_evals=200,
             trials=trials)
 
 print("Best: ", best)
 
 # Output:
-# Best:  {
-#     'learning_rate': 0.09954434211651723,
-#     'max_depth': 13.0,
-#     'max_features': 0.11836604315796628,
-#     'min_samples_leaf': 6.0,
-#     'min_samples_split': 7.0,
-#     'n_estimators': 900.0,
-#     'subsample': 0.8}
+# 'learning_rate': 0.1510695821499192,
+# 'max_depth': 7.0,
+# 'max_features': 0.14864159122322032,
+# 'min_samples_leaf': 1.0,
+# 'min_samples_split': 7.0,
+# 'n_estimators': 270.0,
+# 'subsample': 0.8}

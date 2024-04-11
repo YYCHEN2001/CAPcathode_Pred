@@ -1,25 +1,26 @@
-from xgboost import XGBRegressor
+from sklearn.ensemble import GradientBoostingRegressor
 
-from pdp_function import (load_split_data, combine_data,
-                          predict_plot)
+from dataset_function import dataset_load, dataset_split
+from pdp_function import combine_data, predict_plot
 
-filename = '../../../dataset/carbon_20240326_2.csv'
-X_train, X_test, y_train, y_test, base_features = load_split_data(filename, 'Cs', test_size=0.3, random_state=21)
+df = dataset_load('../../../dataset/carbon_202404_v2.csv')
+X_train, X_test, y_train, y_test = dataset_split(df, test_size=0.3, random_state=21, target='Cs')
+base_features = X_train.columns.tolist()
 train_df, test_df = combine_data(X_train, X_test, y_train, y_test, base_features)
 
-xgb = XGBRegressor(n_estimators=2000,
-                   learning_rate=0.15,
-                   max_depth=3,
-                   min_child_weight=1,
-                   gamma=0.5,
-                   subsample=0.2,
-                   reg_alpha=0.5,
-                   reg_lambda=2,
-                   random_state=21)
+gbr = GradientBoostingRegressor(n_estimators=200,
+                                learning_rate=0.17,
+                                max_depth=4,
+                                min_samples_leaf=1,
+                                min_samples_split=2,
+                                alpha=0.001,
+                                subsample=0.8,
+                                max_features=0.2,
+                                random_state=21)
 
-xgb.fit(X_train, y_train)
-y_pred_train = xgb.predict(X_train)
-y_pred_test = xgb.predict(X_test)
+gbr.fit(X_train, y_train)
+y_pred_train = gbr.predict(X_train)
+y_pred_test = gbr.predict(X_test)
 
-fig, summary_df = predict_plot(xgb, test_df, base_features, 'DV', 'Potential_window', 'matplotlib')
+fig, summary_df = predict_plot(gbr, test_df, base_features, 'ID/IG', 'ID/IG', 'matplotlib')
 fig.show()
